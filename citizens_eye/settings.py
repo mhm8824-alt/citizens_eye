@@ -11,7 +11,7 @@ SECRET_KEY = 'ضع_هنا_مفتاحك_السري'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['citizens-eye.onrender.com', 'localhost', '127.0.0.1']
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
