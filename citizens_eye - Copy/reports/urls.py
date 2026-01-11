@@ -9,7 +9,7 @@ urlpatterns = [
     path('home/', home_view, name='home'),           # الصفحة الرئيسية
     path('logout/', UserLogoutView.as_view(), name='logout'),  # تسجيل الخروج
     path('search/', search_view, name='search'),  # صفحة البحث
-    path('assistant/', assistant_view, name='assistant'),
+    
     path('profile/', profile_view, name='profile'),
 ]
 

@@ -100,9 +100,7 @@ def search_view(request):
 # ----------------------------
 # صفحة المساعد
 # ----------------------------
-@login_required(login_url='/')
-def assistant_view(request):
-    return render(request, 'reports/assistant.html')
+
 
 
 # ----------------------------
