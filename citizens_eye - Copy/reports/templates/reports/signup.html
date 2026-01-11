@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب | عين المواطن</title>
+
+    <!-- خط عربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-box {
+            background: #fff;
+            width: 380px;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            animation: slideUp 0.8s ease;
+            
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signup-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #11998e;
+        }
+
+        .signup-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .signup-box input:focus {
+            border-color: #38ef7d;
+            outline: none;
+            box-shadow: 0 0 5px rgba(56,239,125,0.4);
+        }
+
+        .signup-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .signup-box button:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        .errors {
+            margin-top: 15px;
+            color: red;
+            font-size: 14px;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #11998e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333; /* لون النص */
+}
+
+::placeholder {
+    color: #999; /* لون الكتابة داخل الحقول */
+    font-weight: 500;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: #0f78d1;
+}
+
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+/* الأساس */
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 0.2s;
+    opacity: 0.8;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+/* عين مسكرة */
+.eye-closed {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/709/709612.png");
+}
+
+/* عين مفتوحة */
+.eye-open {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/159/159604.png");
+}
+
+/* إخفاء عين المتصفح (Chrome / Edge) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* إخفاء أيقونات Autofill */
+input:-webkit-autofill {
+    -webkit-text-security: disc;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="signup-box">
+   <h2>إنشاء حساب جديد</h2>
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <input type="text" name="{{ form.username.name }}" placeholder="اسم المستخدم"
+           value="" required autocomplete="off">
+    
+    <input type="email" name="{{ form.email.name }}" placeholder="البريد الإلكتروني"
+           value="" required autocomplete="off">
+    
+ <div class="password-box">
+    <input type="password" id="password" name="password"
+           placeholder="كلمة المرور" required autocomplete="new-password">
+    <span class="toggle-password eye-closed"
+          onclick="togglePassword('password', this)"></span>
+</div>
+
+<div class="password-box">
+    <input type="password" id="password2" name="password2"
+           placeholder="تأكيد كلمة المرور" required autocomplete="new-password">
+    <span class="toggle-password eye-closed"
+          onclick="togglePassword('password2', this)"></span>
+</div>
+
+
+    <button type="submit" class="login-btn">تسجيل</button>
+</form>
+<p class="login-link">لديك حساب؟ <a href="{% url 'login' %}">سجل الدخول</a></p>
+</div>
+
+<script>
+function togglePassword(inputId, icon) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("eye-closed");
+        icon.classList.add("eye-open");
+    } else {
+        input.type = "password";
+        icon.classList.remove("eye-open");
+        icon.classList.add("eye-closed");
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حسابي | عين المواطن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #4d4e8a);
+            overflow-x: hidden;
+        }
+
+        /* ===== الهيدر ===== */
+        header {
+            background: #252c66;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+        }
+        .back-btn {
+            display: none;
+            color: #dcdfff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .back-btn i {
+            margin-left: 6px;
+        }
+
+        /* ===== حساب المستخدم ===== */
+        .user-menu {
+            position: relative;
+            cursor: pointer;
+        }
+        .user-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        .dropdown {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            width: 220px;
+            display: none;
+            padding: 10px;
+            z-index: 100;
+        }
+        .dropdown p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+        .dropdown button {
+            width: 100%;
+            border: none;
+            background: #252c66;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ===== المحتوى ===== */
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #252c66, #6d6d9b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        .avatar i {
+            font-size: 50px;
+            color: white;
+        }
+        .profile-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #252c66;
+        }
+        .profile-email {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .edit-btn {
+            background: linear-gradient(135deg, #252c66, #6d6d9b);
+            color: white;
+        }
+        .logout-btn {
+            background: #f3f3f3;
+            color: #252c66;
+        }
+        .btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* ===== تعديل الملف ===== */
+        .edit-card {
+            display: none;
+            text-align: right;
+        }
+        .edit-card h3 {
+            margin-top: 0;
+            color: #252c66;
+            font-size: 22px;
+        }
+        .edit-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #252c66;
+            box-shadow: 0 0 8px rgba(37,44,102,0.25);
+        }
+
+        /* ===== خلفية الصفحة ===== */
+        .shape {
+            position: fixed;
+            border-radius: 20%;
+            opacity: 0.3;
+            z-index: -1;
+            animation: floatShape linear infinite;
+        }
+        .shape-purple { background: #6d6d9b; }
+        .shape-blue { background: #252c66; }
+        .shape-light { background: #aab0ff; }
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -20px) rotate(30deg); }
+            50% { transform: translate(-25px, 25px) rotate(60deg); }
+            75% { transform: translate(15px, 10px) rotate(90deg); }
+            100% { transform: translate(0, 0) rotate(120deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- أشكال خلفية متطورة -->
+<div class="shape shape-purple" style="width:350px;height:250px;top:-50px;right:-80px;animation-duration:22s;"></div>
+<div class="shape shape-blue" style="width:200px;height:150px;bottom:40px;left:-50px;animation-duration:18s;"></div>
+<div class="shape shape-light" style="width:250px;height:200px;top:30%;right:-60px;animation-duration:20s;"></div>
+<div class="shape shape-purple" style="width:180px;height:180px;bottom:-40px;right:25%;animation-duration:17s;"></div>
+<div class="shape shape-blue" style="width:150px;height:120px;top:-30px;left:20%;animation-duration:25s;"></div>
+<div class="shape shape-light" style="width:200px;height:150px;top:60%;left:-60px;animation-duration:21s;"></div>
+<div class="shape shape-purple" style="width:120px;height:100px;bottom:15%;right:-30px;animation-duration:19s;"></div>
+<div class="shape shape-blue" style="width:150px;height:130px;top:70%;left:10%;animation-duration:23s;"></div>
+
+<header>
+    <h1>عين المواطن</h1>
+    <div class="back-btn" id="backBtn">
+        <i class="fas fa-arrow-right"></i> العودة للملف الشخصي
+    </div>
+    <div class="user-menu" id="userMenu">
+        <div class="user-name">
+            <span>{{ user.username|default:"اسم المستخدم" }}</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="dropdown" id="dropdown">
+            <p>{{ user.email|default:"user@email.com" }}</p>
+            <button>تسجيل خروج</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- كرت الحساب -->
+    <div class="card" id="profileCard">
+        <div class="avatar"><i class="fas fa-user"></i></div>
+        <div class="profile-name">{{ user.username|default:"اسم المستخدم" }}</div>
+        <div class="profile-email">{{ user.email|default:"user@email.com" }}</div>
+        <button class="btn edit-btn" id="editBtn">
+            <i class="fas fa-pen"></i> تعديل
+        </button>
+        <button class="btn logout-btn">تسجيل خروج</button>
+    </div>
+
+    <!-- كرت تعديل الملف الشخصي -->
+    <div class="card edit-card" id="editCard">
+        <h3>تعديل الملف الشخصي</h3>
+        <p>قم بتحديث معلوماتك الشخصية.</p>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <input type="text" name="username" value="{{ user.username }}" required>
+            </div>
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" name="email" value="{{ user.email }}" required>
+            </div>
+            <div class="form-group">
+                <label>تاريخ الميلاد</label>
+                <input type="date" name="birthdate" value="{{ profile.birthdate|date:'Y-m-d' }}">
+            </div>
+            <button type="submit" class="btn edit-btn">حفظ التعديلات</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    // Dropdown حساب المستخدم
+    const userMenu = document.getElementById("userMenu");
+    const dropdown = document.getElementById("dropdown");
+    userMenu.addEventListener("click", () => {
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+    document.addEventListener("click", (e) => {
+        if (!userMenu.contains(e.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+
+    // عرض كرت التعديل وإخفاء كرت الحساب
+    const editBtn = document.getElementById("editBtn");
+    const profileCard = document.getElementById("profileCard");
+    const editCard = document.getElementById("editCard");
+    const backBtn = document.getElementById("backBtn");
+
+    editBtn.onclick = () => {
+        profileCard.style.display = "none";
+        editCard.style.display = "block";
+        backBtn.style.display = "block";
+    };
+
+    backBtn.onclick = () => {
+        editCard.style.display = "none";
+        profileCard.style.display = "block";
+        backBtn.style.display = "none";
+    };
+</script>
+
+</body>
+</html>

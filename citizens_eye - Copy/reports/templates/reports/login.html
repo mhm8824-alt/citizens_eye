@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول | عين المواطن</title>
+
+    <!-- خط عربي جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #252c66, #6d6d9b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: #fff;
+            width: 360px;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #252c66;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .login-box input:focus {
+            border-color: #6d6d9b;
+            outline: none;
+            box-shadow: 0 0 5px rgba(195,55,100,0.4);
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #252c66, #6d6d9b);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-box button:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        .messages {
+            margin-top: 15px;
+            color: red;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #6d6d9b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box input {
+    width: 100%;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+/* شكل العين */
+.eye-closed {
+    background: url("https://cdn-icons-png.flaticon.com/512/709/709612.png") no-repeat center;
+    background-size: contain;
+}
+
+.eye-open {
+    background: url("https://cdn-icons-png.flaticon.com/512/159/159604.png") no-repeat center;
+    background-size: contain;
+}
+
+/* إلغاء عين المتصفح */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+  <h2>تسجيل الدخول</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+   <form method="post">
+    {% csrf_token %}
+   
+    <input type="text" name="username" placeholder="اسم المستخدم" required>
+   <div class="password-box">
+    <input type="password" id="password" name="password"
+           placeholder="كلمة المرور" required autocomplete="new-password">
+    <span class="toggle-password eye-closed"
+          onclick="togglePassword('password', this)"></span>
+</div>
+            <button type="submit" class="login-btn">تسجيل دخول</button>
+        </form>
+    <p class="signup-text">لا تملك حساب؟ <a href="{% url 'signup' %}">سجل الآن</a></p>
+        {% if form.errors %}
+            <div class="error">
+                <p>اسم المستخدم أو كلمة المرور خاطئة!</p>
+            </div>
+        {% endif %}
+    </div>
+<script>
+
+function togglePassword(inputId, el) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        el.classList.remove("eye-closed");
+        el.classList.add("eye-open");
+    } else {
+        input.type = "password";
+        el.classList.remove("eye-open");
+        el.classList.add("eye-closed");
+    }
+}
+</script>
+</body>
+</html>
