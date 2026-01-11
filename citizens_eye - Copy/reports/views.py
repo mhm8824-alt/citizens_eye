@@ -74,7 +74,7 @@ def signup_view(request):
 def search_view(request):
     return render(request, 'reports/search.html')  # راح نعمل القالب بعدين
 
-# صفحة المساعد
+
 
 
 # صفحة الحساب

@@ -97,9 +97,6 @@ def search_view(request):
     return render(request, 'reports/search.html')
 
 
-# ----------------------------
-# صفحة المساعد
-# ----------------------------
 
 
 
