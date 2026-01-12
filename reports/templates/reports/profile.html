@@ -237,8 +237,10 @@
         <div class="profile-email">{{ user.email|default:"user@email.com" }}</div>
         <button class="btn edit-btn" id="editBtn">
             <i class="fas fa-pen"></i> تعديل
-        </button>
-        <button class="btn logout-btn">تسجيل خروج</button>
+       <form action="{% url 'logout' %}" method="post" style="display: inline; width: 100%;">
+    {% csrf_token %}
+    <button type="submit" class="btn logout-btn">تسجيل خروج</button>
+</form>
     </div>
 
     <!-- كرت تعديل الملف الشخصي -->

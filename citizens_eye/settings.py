@@ -108,3 +108,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/redirect home/'  
 # بعد تسجيل الخروج يرجع لصفحة تسجيل الدخول
 LOGOUT_REDIRECT_URL = '/redirect login/'
+LOGOUT_REDIRECT_URL = 'login'
