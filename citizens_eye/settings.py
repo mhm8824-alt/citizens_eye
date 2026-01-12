@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # مفتاح سري (ما تغيره لو مش لازم)
 SECRET_KEY = 'ضع_هنا_مفتاحك_السري'
+CSRF_TRUSTED_ORIGINS = ['https://citizens-eye.onrender.com']
 
 DEBUG = True
 
