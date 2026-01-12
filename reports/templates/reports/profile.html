@@ -221,10 +221,16 @@
             <span>{{ user.username|default:"اسم المستخدم" }}</span>
             <i class="fas fa-chevron-down"></i>
         </div>
-        <div class="dropdown" id="dropdown">
-            <p>{{ user.email|default:"user@email.com" }}</p>
-            <button>تسجيل خروج</button>
-        </div>
+       <div class="dropdown" id="dropdown">
+    <p>{{ user.email|default:"user@email.com" }}</p>
+    
+    <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+        {% csrf_token %}
+        <button type="submit" style="width: 100%; border: none; background: #252c66; color: white; padding: 10px; border-radius: 8px; cursor: pointer; font-family: 'Cairo', sans-serif;">
+            <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+        </button>
+    </form>
+</div>
     </div>
 </header>
 
