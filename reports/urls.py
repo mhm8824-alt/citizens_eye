@@ -12,13 +12,3 @@ urlpatterns = [
    
     path('profile/', profile_view, name='profile'),
 ]
-
-from django.contrib import admin # هذا السطر لاستيراد لوحة الإدارة
-from django.urls import path
-from .views import create_admin_now  # استيراد الدالة اللي كتبناها في views.py
-
-urlpatterns = [
-    path('admin/', admin.site.urls),  # هذا هو السطر الصحيح للوحة الإدارة
-    path('generate-admin/', create_admin_now), # هذا السطر لإنشاء حسابك
-]
-
