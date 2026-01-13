@@ -135,3 +135,15 @@ def profile_view(request):
         'profile': profile,
         'user': request.user
     })
+
+
+
+    from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin_now(request):
+    if not User.objects.filter(username='mohamad_admin').exists():
+        User.objects.create_superuser('mohamad_admin', 'test@test.com', 'Pass123456')
+        return HttpResponse("م الحساب صار جاهز. الاسم: mohamad_admin")
+    else:
+        return HttpResponse("الحساب موجود أصلال.")
