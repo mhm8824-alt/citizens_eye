@@ -109,3 +109,19 @@ LOGIN_REDIRECT_URL = '/redirect home/'
 # بعد تسجيل الخروج يرجع لصفحة تسجيل الدخول
 LOGOUT_REDIRECT_URL = '/redirect login/'
 LOGOUT_REDIRECT_URL = 'login'
+
+
+
+
+
+# كود لإنشاء أدمن تلقائي عند تشغيل السيرفر
+import os
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+
+@receiver(post_migrate)
+def create_superuser(sender, **kwargs):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+        print("Superuser created: admin / admin123")

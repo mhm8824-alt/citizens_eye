@@ -135,7 +135,3 @@ def profile_view(request):
         'profile': profile,
         'user': request.user
     })
-
-
-
-    
