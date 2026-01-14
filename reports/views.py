@@ -102,10 +102,10 @@ def search_view(request):
             Report.objects.create(
                 title=title,
                 location=location,
-                description="إرسال من صفحة التتبع",
+                description="تم تقديمها عبر صفحة البحث والتتبع",
                 created_by=request.user
             )
-            messages.success(request, '✅ تم استلام بيانات التتبع وحفظها')
+            messages.success(request, '✅🔍 تم تسجيل الشكوى وهي قيد التتبع الآن')
             return redirect('search')
             
     return render(request, 'reports/search.html')
