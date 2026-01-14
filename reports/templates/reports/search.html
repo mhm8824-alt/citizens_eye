@@ -209,11 +209,13 @@ body {
     </div>
 
     <!-- صندوق التتبع -->
-    <div class="track-box">
-        <h3>بيانات الشكوى</h3>
+  <div class="track-box">
+    <h3>بيانات الشكوى</h3>
 
-        <input type="text" id="titleInput" placeholder="عنوان الشكوى">
-        <input type="text" placeholder="الموقع" list="locations">
+    <form method="POST">
+        {% csrf_token %} <input type="text" id="titleInput" name="title" placeholder="عنوان الشكوى" required>
+        
+        <input type="text" name="location" placeholder="الموقع" list="locations" required>
 
         <datalist id="locations">
             <option value="دمشق">
@@ -226,18 +228,16 @@ body {
             <option value="درعا">
         </datalist>
 
-        <button class="track-btn" onclick="trackComplaint()">تتبع</button>
+        <button type="submit" class="track-btn">تتبع وإرسال</button>
+    </form>
 
-        <div class="tracking-msg" id="trackingMsg">
-            🔍 جاري تتبع شكواك...
-        </div>
-
-        <div class="status-card" id="statusCard">
-            <p><strong>الحالة:</strong> قيد المعالجة</p>
-            <p><strong>الوقت المتوقع:</strong> من 3 إلى 5 أيام</p>
-        </div>
-    </div>
-
+    {% if messages %}
+        {% for message in messages %}
+            <div class="tracking-msg" style="display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
 
 <script>
@@ -259,7 +259,7 @@ body {
     }
 </script>
 
-<div class="bottom-nav">
+<div class="bottom-nav">venv\Scripts\activate
     <a href="{% url 'home' %}" class="nav-item">
         <i class="fas fa-house-chimney nav-icon"></i>
         <span class="nav-text">رئيسية</span>

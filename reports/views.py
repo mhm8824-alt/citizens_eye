@@ -94,8 +94,21 @@ def signup_view(request):
 # ----------------------------
 @login_required(login_url='/')
 def search_view(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        location = request.POST.get('location')
+        
+        if title and location:
+            Report.objects.create(
+                title=title,
+                location=location,
+                description="إرسال من صفحة التتبع",
+                created_by=request.user
+            )
+            messages.success(request, '✅ تم استلام بيانات التتبع وحفظها')
+            return redirect('search')
+            
     return render(request, 'reports/search.html')
-
 
 
 
